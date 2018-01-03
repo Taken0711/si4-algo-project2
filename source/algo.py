@@ -15,10 +15,6 @@ def run(objects, bin_size, algo):
     print("Accès bin:", res.bin_access)
 
 
-def fit(bin, object, max):
-    return bin + object <= max
-
-
 def next_fit(objects, bin_size):
     bins = BinList(bin_size)
     for object in objects:
@@ -34,7 +30,7 @@ def first_fit(objects, bin_size):
     bins = BinList(bin_size)
     for object in objects:
         fitted = False
-        for i, bin in enumerate(bins):
+        for i in range(len(bins)):
             if bins.fit(i, object):
                 bins[i] += object
                 fitted = True
@@ -63,7 +59,7 @@ def best_fit(objects, bin_size):
         i = 0
         fitted = False
         for j, bin in enumerate(bins):
-            if bins.fit(j, object) and (bin > bins[i] or not fitted):
+            if bins.fit(j, object) and (not fitted or bin > bins[i]):
                 i = j
                 fitted = True
         if fitted:
@@ -77,14 +73,9 @@ def best_fit(objects, bin_size):
 def almost_worst_fit(objects, bin_size):
     bins = BinList(bin_size)
     for object in objects:
-        can_fit = []
-        for i in range(len(bins)):
-            if bins.fit(i, object):
-                can_fit.append(i)
-        if len(can_fit) > 1:
-            bins[can_fit[1]] += object
-        elif len(can_fit) == 1:
-            bins[can_fit[0]] += object
+        can_fit = list(filter(lambda i: bins.fit(i, object), range(len(bins))))
+        if can_fit:
+            bins[can_fit[1 if len(can_fit) > 1 else 0]] += object
         else:
             bins.append(object)
         print(bins)
