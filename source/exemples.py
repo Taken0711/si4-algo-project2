@@ -1,7 +1,7 @@
 from random import randint
 from glob import glob
 
-import source.algo as algo
+from source import algo
 
 def main():
     print(glob("*"))

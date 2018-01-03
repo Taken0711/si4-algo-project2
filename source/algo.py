@@ -1,62 +1,69 @@
 from operator import itemgetter
+from source.BinList import BinList
 
 
 def run_all(objects, bin_size):
-    print ("\n", objects, "\nFirst fit:", str(first_fit(objects, bin_size)))
-    print ("\n", objects, "\nNext fit:", str(next_fit(objects, bin_size)))
-    print ("\n", objects, "\nWorst fit:", str(worst_fit(objects, bin_size)))
-    print ("\n", objects, "\nBest fit:", str(best_fit(objects, bin_size)))
-    print ("\n", objects, "\nAlmost worst fit:", str(best_fit(objects, bin_size)))
+    print(objects)
+    [run(objects, bin_size, f) for f in [next_fit, first_fit, worst_fit, best_fit, almost_worst_fit]]
+
+
+def run(objects, bin_size, algo):
+    print("\n")
+    print("===", algo.__name__, "===")
+    res = algo(objects, bin_size)
+    print("Nombre bin:", len(res))
+    print("Accès bin:", res.bin_access)
 
 
 def fit(bin, object, max):
     return bin + object <= max
 
+
 def next_fit(objects, bin_size):
-    bins = [0]
+    bins = BinList(bin_size)
     for object in objects:
-        if fit(bins[-1], object, bin_size):
+        if bins.fit(-1, object):
             bins[-1] += object
         else:
             bins.append(object)
         print(bins)
-    return len(bins)
+    return bins
 
 
 def first_fit(objects, bin_size):
-    bins = [0]
+    bins = BinList(bin_size)
     for object in objects:
         fitted = False
         for i, bin in enumerate(bins):
-            if fit(bin, object, bin_size):
+            if bins.fit(i, object):
                 bins[i] += object
                 fitted = True
                 break
         if not fitted:
             bins.append(object)
         print(bins)
-    return len(bins)
+    return bins
 
 
 def worst_fit(objects, bin_size):
-    bins = [0]
+    bins = BinList(bin_size)
     for object in objects:
         i = min(enumerate(bins), key=itemgetter(1))[0]
-        if fit(bins[i], object, bin_size):
+        if bins.fit(i, object):
             bins[i] += object
         else:
             bins.append(object)
         print(bins)
-    return len(bins)
+    return bins
 
 
 def best_fit(objects, bin_size):
-    bins = [0]
+    bins = BinList(bin_size)
     for object in objects:
         i = 0
         fitted = False
         for j, bin in enumerate(bins):
-            if fit(bin, object, bin_size) and (bin > bins[i] or not fitted):
+            if bins.fit(j, object) and (bin > bins[i] or not fitted):
                 i = j
                 fitted = True
         if fitted:
@@ -64,21 +71,21 @@ def best_fit(objects, bin_size):
         else:
             bins.append(object)
         print(bins)
-    return len(bins)
+    return bins
 
 
 def almost_worst_fit(objects, bin_size):
-    bins = [0]
-    can_fit = []
+    bins = BinList(bin_size)
     for object in objects:
-        for e in enumerate(bins):
-            if fit(e[1], object, bin_size):
-                can_fit.append(e)
+        can_fit = []
+        for i in range(len(bins)):
+            if bins.fit(i, object):
+                can_fit.append(i)
         if len(can_fit) > 1:
-            bins[can_fit[1][0]] += object
+            bins[can_fit[1]] += object
         elif len(can_fit) == 1:
-            bins[can_fit[0][0]] += object
+            bins[can_fit[0]] += object
         else:
             bins.append(object)
         print(bins)
-    return len(bins)
+    return bins
