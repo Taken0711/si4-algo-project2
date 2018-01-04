@@ -5,7 +5,7 @@ from source import algo
 
 def main():
     print(glob("*"))
-    for path in glob("exemples/yolo*"):
+    for path in glob("exemples/*"):
         print("===", path, "===")
         f = open(path, 'r')
         # Taille bin
