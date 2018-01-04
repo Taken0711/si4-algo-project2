@@ -1,4 +1,3 @@
-from random import randint
 from glob import glob
 
 from source import implem
@@ -6,6 +5,7 @@ from source import implem
 
 def main():
     print(glob("*"))
+    res = {}
     for path in glob("exemples/*"):
         print("===", path, "===")
         f = open(path, 'r')
@@ -15,7 +15,8 @@ def main():
         # Objets
         f.readline()
         objects = list(map(int, f.readline().strip()[:-1].split(", ")))
-        return implem.run_all(objects, bin_size)
+        res[path] = implem.run_all(objects, bin_size)
+    return res
 
 
 if __name__ == '__main__':

@@ -1,6 +1,6 @@
 from random import randint
 
-import source.implem as algo
+from source import implem
 
 def main():
     bin_size = int(input("Taille bin: "))
@@ -8,7 +8,7 @@ def main():
     min_obj = int(input("Taille min d'un objet: "))
     max_obj = int(input("Taille max d'un objet: "))
     objects = [randint(min_obj, max_obj) for _ in range(nb_obj)]
-    algo.run_all(objects, bin_size)
+    implem.run_all(objects, bin_size)
 
 
 if __name__ == '__main__':

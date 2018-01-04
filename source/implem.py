@@ -6,7 +6,7 @@ from source.BinList import BinList
 
 def run_all(objects, bin_size):
     print(objects)
-    return [run(objects, bin_size, f) for f in [next_fit, first_fit, worst_fit, best_fit, almost_worst_fit]]
+    return [[f.__name__, run(objects, bin_size, f)] for f in [next_fit, first_fit, worst_fit, best_fit, almost_worst_fit]]
 
 
 def run(objects, bin_size, algo):
@@ -14,7 +14,7 @@ def run(objects, bin_size, algo):
     print("===", algo.__name__, "===")
     res = algo(objects, bin_size)
     print("Nombre de camions utilisés :", len(res))
-    print("Accès aux camions :", res.bin_access)
+    print("Nombre d'accès aux camions :", res.bin_access)
     print("Moyenne de remplissage d'un camion :", round(100 * sum(res) / (len(res)*bin_size)), "%")
 
 
