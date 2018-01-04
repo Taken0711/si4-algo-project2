@@ -74,6 +74,7 @@ def almost_worst_fit(objects, bin_size):
     bins = BinList(bin_size)
     for object in objects:
         can_fit = list(filter(lambda i: bins.fit(i, object), range(len(bins))))
+        sorted(can_fit, key=lambda i: bins[i])
         if can_fit:
             bins[can_fit[1 if len(can_fit) > 1 else 0]] += object
         else:
