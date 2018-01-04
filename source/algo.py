@@ -1,3 +1,5 @@
+# coding: utf8
+
 from operator import itemgetter
 from source.BinList import BinList
 
@@ -11,8 +13,31 @@ def run(objects, bin_size, algo):
     print("\n")
     print("===", algo.__name__, "===")
     res = algo(objects, bin_size)
-    print("Nombre bin:", len(res))
-    print("Accès bin:", res.bin_access)
+    print("Nombre de camions utilisés :", len(res))
+    print("Accès aux camions :", res.bin_access)
+    print("Moyenne de remplissage d'un camion :", round(100 * sum(res) / (len(res)*bin_size)), "%")
+
+    percent = [0, 0, 0, 0, 0]
+    for bin in res:
+        div = bin / bin_size
+        if div == 1:
+            percent[0] += 1
+            continue
+        if div >= 0.75:
+            percent[1] += 1
+            continue
+        if div >= 0.5:
+            percent[2] += 1
+            continue
+        if div >= 0.25:
+            percent[3] += 1
+            continue
+        percent[4] += 1
+    print("Camions pleins :", percent[0])
+    print("Camions presque pleins :", percent[1])
+    print("Camions bien remplis :", percent[2])
+    print("Camions peu remplis :", percent[3])
+    print("Camions presque vides :", percent[4])
 
 
 def next_fit(objects, bin_size):
