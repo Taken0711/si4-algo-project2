@@ -1,7 +1,8 @@
 from random import randint
 from glob import glob
 
-from source import algo
+from source import implem
+
 
 def main():
     print(glob("*"))
@@ -14,7 +15,7 @@ def main():
         # Objets
         f.readline()
         objects = list(map(int, f.readline().strip()[:-1].split(", ")))
-        algo.run_all(objects, bin_size)
+        return implem.run_all(objects, bin_size)
 
 
 if __name__ == '__main__':

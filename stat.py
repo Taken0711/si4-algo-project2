@@ -1,6 +1,6 @@
 from random import randint
 
-import source.algo as algo
+import source.implem as algo
 
 def main():
     bin_size = int(input("Taille bin: "))
