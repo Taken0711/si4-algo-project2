@@ -225,3 +225,8 @@ crashlytics.properties
 crashlytics-build.properties
 fabric.properties
 
+# our exemple stats
+analytics_exemples/*.csv
+# the useless scripts
+algo.ex
+stat.ex
