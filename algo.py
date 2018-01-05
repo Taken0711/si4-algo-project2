@@ -1,10 +1,11 @@
+#!/usr/bin/env python3
+
 from glob import glob
 
 from source import implem
 
 
 def main():
-    print(glob("*"))
     res = {}
     for path in glob("exemples/*"):
         print("===", path, "===")
