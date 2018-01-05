@@ -4,10 +4,19 @@ class BinList(list):
         super().__init__([0])
         self.bin_size = size
         self.bin_access = 0
+        self.bin_change = 0
 
     def __getitem__(self, key):
         self.bin_access += 1
         return super().__getitem__(key)
+
+    def __setitem__(self, key, value):
+        self.bin_change += 1
+        return super().__setitem__(key, value)
+
+    def append(self, value):
+        self.bin_change += 1
+        return super().append(value)
 
     def __iter__(self):
         self.m_iter = super().__iter__()

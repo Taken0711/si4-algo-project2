@@ -15,6 +15,7 @@ def run(objects, bin_size, algo):
     res = algo(objects, bin_size)
     print("Nombre de camions utilisés :", len(res))
     print("Nombre d'accès aux camions :", res.bin_access)
+    print("Nombre de remplissage des camions : ", res.bin_change)
     print("Moyenne de remplissage d'un camion :", round(100 * sum(res) / (len(res)*bin_size)), "%")
 
 
