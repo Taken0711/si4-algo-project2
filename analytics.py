@@ -5,7 +5,7 @@ import algo
 def main():
     ex = algo.main()
     # Need to go step by step, python is exploding
-    for inFile, all_res in ex:
+    for inFile, all_res in ex.items():
         with open("analytics_" + inFile + ".csv", 'w') as csvfile:
             writer = csv.DictWriter(csvfile, fieldnames=["Algorithme", "Nombre de camions utilisés", "Nombre d'accès aux camions", "Nombre de remplissage des camions",
                     "Moyenne de remplissage d'un camion", "Camions remplis à 1-10%", "Camions remplis à 11-20%", "Camions remplis à 21-30%", "Camions remplis à 31-40%",
@@ -19,7 +19,7 @@ def main():
                 row["Nombre de camions utilisés"] = len(bins)
                 row["Nombre d'accès aux camions"] = bins.bin_access
                 row["Nombre de remplissage des camions"] = bins.bin_change
-                row["Moyenne de remplissage d'un camion"] = round(100 * sum(res) / (len(res)*bins.bin_size))
+                row["Moyenne de remplissage d'un camion"] = round(100 * sum(bins) / (len(bins)*bins.bin_size))
                 for i in range(0, 90, 10):
                     min = i + 1
                     max = i + 10
