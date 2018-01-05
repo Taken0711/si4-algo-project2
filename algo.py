@@ -4,7 +4,6 @@ from source import implem
 
 
 def main():
-    print(glob("*"))
     res = {}
     for path in glob("exemples/*"):
         print("===", path, "===")
