@@ -1,7 +1,7 @@
 # coding: utf8
 
 from operator import itemgetter
-from source.BinList import BinList
+from BinList import BinList
 
 
 def run_all(objects, bin_size):

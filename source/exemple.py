@@ -2,7 +2,7 @@
 
 from random import randint
 
-from source import implem
+import implem
 
 def main():
     bin_size = int(input("Taille bin: "))
