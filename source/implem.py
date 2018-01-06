@@ -18,28 +18,11 @@ def run(objects, bin_size, algo):
     print("Nombre de remplissage des camions : ", res.bin_change)
     print("Moyenne de remplissage d'un camion :", round(100 * sum(res) / (len(res)*bin_size)), "%")
 
-
-    percent = [0, 0, 0, 0, 0]
-    for bin in res:
-        div = bin / bin_size
-        if div == 1:
-            percent[0] += 1
-            continue
-        if div >= 0.75:
-            percent[1] += 1
-            continue
-        if div >= 0.5:
-            percent[2] += 1
-            continue
-        if div >= 0.25:
-            percent[3] += 1
-            continue
-        percent[4] += 1
-    print("Camions pleins :", percent[0])
-    print("Camions presque pleins :", percent[1])
-    print("Camions bien remplis :", percent[2])
-    print("Camions peu remplis :", percent[3])
-    print("Camions presque vides :", percent[4])
+    binsCounter = [0 for _ in range(0, 5)]
+    for filling in res:
+        binsCounter[4 - (int)(4*filling / bin_size)] += 1
+    for state, nbOfBin in zip(["pleins", "presque pleins", "bien remplis", "peu remplis", "presque vides"], binsCounter):
+        print("Camions", state, ":", nbOfBin)
 
     return res
 
