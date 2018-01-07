@@ -2,11 +2,13 @@
 # coding: utf8
 
 import csv
+from sys import argv
+
 import algo
 
 
 def main():
-    ex = algo.main()
+    ex = algo.run_exemples("-v" in argv)
     # Need to go step by step, python is exploding
     allStats = []
     columnsName = ["Algorithme", "Nombre de camions utilisés", "Nombre d'accès aux camions", "Nombre de remplissage des camions",

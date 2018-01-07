@@ -5,25 +5,28 @@ from operator import itemgetter
 from BinList import BinList
 
 
-def run_all(objects, bin_size):
-    print(objects)
-    return [[f.__name__, run(objects, bin_size, f)] for f in [next_fit, first_fit, worst_fit, best_fit, almost_worst_fit]]
+def run_all(objects, bin_size, verbose):
+    if verbose:
+        print(objects)
+    return [[f.__name__, run(objects, bin_size, f, verbose)] for f in [next_fit, first_fit, worst_fit, best_fit, almost_worst_fit]]
 
 
-def run(objects, bin_size, algo):
-    print("\n")
-    print("===", algo.__name__, "===")
+def run(objects, bin_size, algo, verbose):
     res = algo(objects, bin_size)
-    print("Nombre de camions utilisés :", len(res))
-    print("Nombre d'accès aux camions :", res.bin_access)
-    print("Nombre de remplissage des camions : ", res.bin_change)
-    print("Moyenne de remplissage d'un camion :", round(100 * sum(res) / (len(res)*bin_size)), "%")
 
-    binsCounter = [0 for _ in range(0, 5)]
-    for filling in res:
-        binsCounter[4 - (int)(4*filling / bin_size)] += 1
-    for state, nbOfBin in zip(["pleins", "presque pleins", "bien remplis", "peu remplis", "presque vides"], binsCounter):
-        print("Camions", state, ":", nbOfBin)
+    if verbose:
+        print("\n")
+        print("===", algo.__name__, "===")
+        print("Nombre de camions utilisés :", len(res))
+        print("Nombre d'accès aux camions :", res.bin_access)
+        print("Nombre de remplissage des camions : ", res.bin_change)
+        print("Moyenne de remplissage d'un camion :", round(100 * sum(res) / (len(res)*bin_size)), "%")
+
+        binsCounter = [0 for _ in range(0, 5)]
+        for filling in res:
+            binsCounter[4 - (int)(4*filling / bin_size)] += 1
+        for state, nbOfBin in zip(["pleins", "presque pleins", "bien remplis", "peu remplis", "presque vides"], binsCounter):
+            print("Camions", state, ":", nbOfBin)
 
     return res
 
