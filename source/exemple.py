@@ -27,15 +27,14 @@ def main():
             algo = res[0]
             if not algo in best_case:
                 best_case[algo] = {}
-            if not best_case[algo] or len(res[1]) < best_case[algo]["Nombre de camions utilisés"]:
-                bins = res[1]
+            bins = res[1]
+            if not best_case[algo] or round(100 * sum(bins) / (len(bins)*bins.bin_size)) > best_case[algo]["Moyenne de remplissage d'un camion"]:
                 best_case[algo]["Nombre de camions utilisés"] = len(bins)
                 best_case[algo]["Nombre d'accès aux camions"] = bins.bin_access
                 best_case[algo]["Moyenne de remplissage d'un camion"] = round(100 * sum(bins) / (len(bins)*bins.bin_size))
             if not algo in worst_case:
                 worst_case[algo] = {}
-            if not worst_case[algo] or len(res[1]) > worst_case[algo]["Nombre de camions utilisés"]:
-                bins = res[1]
+            if not worst_case[algo] or round(100 * sum(bins) / (len(bins)*bins.bin_size)) < worst_case[algo]["Moyenne de remplissage d'un camion"]:
                 worst_case[algo]["Nombre de camions utilisés"] = len(bins)
                 worst_case[algo]["Nombre d'accès aux camions"] = bins.bin_access
                 worst_case[algo]["Moyenne de remplissage d'un camion"] = round(100 * sum(bins) / (len(bins)*bins.bin_size))
@@ -51,8 +50,8 @@ def main():
     for algo in best_case.keys():
         print("===", algo, "===")
         print("{} {}: {}".format(algo, "best case", ", ".join([k + " : " + str(best_case[algo][k]) for k in best_case[algo]])))
-        print("{} {}: {}".format(algo, "worst case", ", ".join([k + " : " + str(worst_case[algo][k]) for k in worst_case[algo]])))
         print("{} {}: {}".format(algo, "average", ", ".join([k + " : " + str(average[algo][k]) for k in average[algo]])))
+        print("{} {}: {}".format(algo, "worst case", ", ".join([k + " : " + str(worst_case[algo][k]) for k in worst_case[algo]])))
         print()
 
 
