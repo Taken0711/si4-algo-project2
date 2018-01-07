@@ -35,7 +35,6 @@ def next_fit(objects, bin_size):
             bins[-1] += object
         else:
             bins.append(object)
-        print(bins)
     return bins
 
 
@@ -50,7 +49,6 @@ def first_fit(objects, bin_size):
                 break
         if not fitted:
             bins.append(object)
-        print(bins)
     return bins
 
 
@@ -62,7 +60,6 @@ def worst_fit(objects, bin_size):
             bins[i] += object
         else:
             bins.append(object)
-        print(bins)
     return bins
 
 
@@ -79,7 +76,6 @@ def best_fit(objects, bin_size):
             bins[i] += object
         else:
             bins.append(object)
-        print(bins)
     return bins
 
 
@@ -92,5 +88,4 @@ def almost_worst_fit(objects, bin_size):
             bins[can_fit[1 if len(can_fit) > 1 else 0]] += object
         else:
             bins.append(object)
-        print(bins)
     return bins
