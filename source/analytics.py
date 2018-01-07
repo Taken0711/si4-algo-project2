@@ -31,7 +31,7 @@ def main():
                 for i in range(0, 100, 10):
                     m_min = i + 1
                     m_max = i + 10
-                    row["% de camions remplis à {0}-{1}%".format(m_min, m_max)] = round(100 * len(list(filter(lambda bin: m_min <= 100 * bin/bins.bin_size <= m_max, bins)))/len(bins), 2)
+                    row["% de camions remplis à {0}-{1}%".format(m_min, m_max)] = round(100 * len(list(filter(lambda bin: m_min <= round(100 * bin/bins.bin_size) <= m_max, bins)))/len(bins), 2)
                 writer.writerow(row)
                 rows.append(row)
             allStats.append(rows)
