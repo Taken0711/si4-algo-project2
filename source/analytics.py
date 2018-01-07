@@ -17,7 +17,7 @@ def main():
         with open("analytics_" + inFile + ".csv", 'w') as csvfile:
             writer = csv.DictWriter(csvfile, fieldnames=columnsName)
             writer.writeheader()
-            rows = [];
+            rows = []
             for res in all_res:
                 row = {}
                 row["Algorithme"] = res[0]
