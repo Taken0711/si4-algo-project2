@@ -1,4 +1,0 @@
-Taille bin
-10
-Objets
-4, 8, 5, 1.
